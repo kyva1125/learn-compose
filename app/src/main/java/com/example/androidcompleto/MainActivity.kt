@@ -48,12 +48,13 @@ enum class Pantalla {
     MENU, FLUTTER, RUTA,
 
     // ---- PISTA KOTLIN (el lenguaje: corre igual en Android, iOS y servidor) ----
-    KOTLIN, KOTLIN_AVANZADO, CORRUTINAS, CORRUTINAS_AVANZADAS, TESTING, ARQUITECTURA,
+    KOTLIN, KOTLIN_AVANZADO, KOTLIN_IDIOMATICO, CORRUTINAS, CORRUTINAS_AVANZADAS,
+    TESTING, ARQUITECTURA,
 
     // ---- PISTA COMPOSE (la UI) ----
     COMPOSE, ESTADO, EFECTOS, NAVEGACION, NAVEGACION_TS, ANIMACIONES, FORMULARIOS,
-    GESTOS, ACCESIBILIDAD, ADAPTIVE, INTEROP, RENDIMIENTO, LAYOUTS_CUSTOM,
-    COMPOSITION_LOCAL,
+    GESTOS, ACCESIBILIDAD, ADAPTIVE, INTEROP, MATERIAL, TEXTO, LISTAS_AVANZADAS,
+    RENDIMIENTO, LAYOUTS_CUSTOM, COMPOSITION_LOCAL,
 
     // ---- PISTA KMP Y DATOS (la capa que se comparte entre plataformas) ----
     KMP, KTOR_KMP, INYECCION, RED, PERSISTENCIA, ROOM, RED_AVANZADA, OFFLINE
@@ -167,6 +168,7 @@ fun AppPrincipal() {
                         // Pista Kotlin
                         Pantalla.KOTLIN -> "Fundamentos Kotlin"
                         Pantalla.KOTLIN_AVANZADO -> "Kotlin Avanzado"
+                        Pantalla.KOTLIN_IDIOMATICO -> "Kotlin Idiomático"
                         Pantalla.CORRUTINAS -> "Corrutinas y Flows"
                         Pantalla.CORRUTINAS_AVANZADAS -> "Corrutinas Avanzadas"
                         Pantalla.TESTING -> "Testing Asíncrono"
@@ -183,6 +185,9 @@ fun AppPrincipal() {
                         Pantalla.ACCESIBILIDAD -> "Accesibilidad"
                         Pantalla.ADAPTIVE -> "Layouts Adaptativos"
                         Pantalla.INTEROP -> "Interop con Views"
+                        Pantalla.MATERIAL -> "Material 3 y Theming"
+                        Pantalla.TEXTO -> "Texto y Entrada"
+                        Pantalla.LISTAS_AVANZADAS -> "Listas Avanzadas"
                         Pantalla.RENDIMIENTO -> "Rendimiento en Compose"
                         Pantalla.LAYOUTS_CUSTOM -> "Layouts Custom y Canvas"
                         Pantalla.COMPOSITION_LOCAL -> "CompositionLocal"
@@ -215,6 +220,7 @@ fun AppPrincipal() {
                 // Pista Kotlin
                 Pantalla.KOTLIN -> PantallaKotlin()
                 Pantalla.KOTLIN_AVANZADO -> PantallaKotlinAvanzado()
+                Pantalla.KOTLIN_IDIOMATICO -> PantallaKotlinIdiomatico()
                 Pantalla.CORRUTINAS -> PantallaCorrutinas()
                 Pantalla.CORRUTINAS_AVANZADAS -> PantallaCorrutinasAvanzadas()
                 Pantalla.TESTING -> PantallaTesting()
@@ -231,6 +237,9 @@ fun AppPrincipal() {
                 Pantalla.ACCESIBILIDAD -> PantallaAccesibilidad()
                 Pantalla.ADAPTIVE -> PantallaAdaptive()
                 Pantalla.INTEROP -> PantallaInterop()
+                Pantalla.MATERIAL -> PantallaMaterial()
+                Pantalla.TEXTO -> PantallaTexto()
+                Pantalla.LISTAS_AVANZADAS -> PantallaListasAvanzadas()
                 Pantalla.RENDIMIENTO -> PantallaRendimiento()
                 Pantalla.LAYOUTS_CUSTOM -> PantallaLayoutsCustom()
                 Pantalla.COMPOSITION_LOCAL -> PantallaCompositionLocal()
@@ -270,10 +279,11 @@ val temario: Map<Pista, List<OpcionMenu>> = mapOf(
     Pista.KOTLIN_P to listOf(
         OpcionMenu("K1. Kotlin Interactivo", "Ejecuta 10 demos: null safety, lambdas, sealed...", Pantalla.KOTLIN),
         OpcionMenu("K2. Kotlin Avanzado 🧬", "Varianza, reified, delegados, inline, DSLs, value class", Pantalla.KOTLIN_AVANZADO),
-        OpcionMenu("K3. Corrutinas", "Suspend, Async/Await y Flows", Pantalla.CORRUTINAS),
-        OpcionMenu("K4. Corrutinas Avanzadas ⚙️", "Cancelación, supervisorScope, flatMapLatest, retry", Pantalla.CORRUTINAS_AVANZADAS),
-        OpcionMenu("K5. Testing Asíncrono 🧪", "runTest, tiempo virtual, Turbine y fakes", Pantalla.TESTING),
-        OpcionMenu("K6. Arquitectura Senior 🏛️", "Clean Architecture + MVI + reducer puro testeado", Pantalla.ARQUITECTURA),
+        OpcionMenu("K3. Kotlin Idiomático ✨", "Sequences, channels, infix, fold/windowed, Result", Pantalla.KOTLIN_IDIOMATICO),
+        OpcionMenu("K4. Corrutinas", "Suspend, Async/Await y Flows", Pantalla.CORRUTINAS),
+        OpcionMenu("K5. Corrutinas Avanzadas ⚙️", "Cancelación, supervisorScope, flatMapLatest, retry", Pantalla.CORRUTINAS_AVANZADAS),
+        OpcionMenu("K6. Testing Asíncrono 🧪", "runTest, tiempo virtual, Turbine y fakes", Pantalla.TESTING),
+        OpcionMenu("K7. Arquitectura Senior 🏛️", "Clean Architecture + MVI + reducer puro testeado", Pantalla.ARQUITECTURA),
     ),
     Pista.COMPOSE_P to listOf(
         OpcionMenu("C1. Compose", "Layouts, Weight, Grids, LazyRow y Modifiers", Pantalla.COMPOSE),
@@ -287,9 +297,12 @@ val temario: Map<Pista, List<OpcionMenu>> = mapOf(
         OpcionMenu("C9. Accesibilidad ♿", "Semantics, TalkBack, 48dp y por qué hace testeable tu app", Pantalla.ACCESIBILIDAD),
         OpcionMenu("C10. Layouts Adaptativos 📱", "WindowSizeClass, list-detail, tablets y plegables", Pantalla.ADAPTIVE),
         OpcionMenu("C11. Interop con Views 🔌", "AndroidView y ComposeView: migrar apps legacy", Pantalla.INTEROP),
-        OpcionMenu("C12. Rendimiento ⚡", "Recomposición, estabilidad y lecturas diferidas EN VIVO", Pantalla.RENDIMIENTO),
-        OpcionMenu("C13. Layouts Custom 📐", "Layout(), Modifier.layout y gráficas con Canvas", Pantalla.LAYOUTS_CUSTOM),
-        OpcionMenu("C14. CompositionLocal 🎨", "Design tokens y el secreto de MaterialTheme", Pantalla.COMPOSITION_LOCAL),
+        OpcionMenu("C12. Material 3 y Theming 🎭", "Roles de color, dynamic color, diálogos, hojas, insets", Pantalla.MATERIAL),
+        OpcionMenu("C13. Texto y Entrada ✍️", "AnnotatedString, máscaras, teclado y foco", Pantalla.TEXTO),
+        OpcionMenu("C14. Listas Avanzadas 📜", "Sticky headers, animateItem, scroll infinito, Savers", Pantalla.LISTAS_AVANZADAS),
+        OpcionMenu("C15. Rendimiento ⚡", "Recomposición, estabilidad y lecturas diferidas EN VIVO", Pantalla.RENDIMIENTO),
+        OpcionMenu("C16. Layouts Custom 📐", "Layout(), Modifier.layout y gráficas con Canvas", Pantalla.LAYOUTS_CUSTOM),
+        OpcionMenu("C17. CompositionLocal 🎨", "Design tokens y el secreto de MaterialTheme", Pantalla.COMPOSITION_LOCAL),
     ),
     Pista.KMP_P to listOf(
         OpcionMenu("M1. Kotlin Multiplatform 🌍", "expect/actual, commonMain y Compose Multiplatform", Pantalla.KMP),

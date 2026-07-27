@@ -51,6 +51,10 @@ val rutaCompleta = listOf(
         HitoAprendizaje("ka_delegados", "Delegados", "by lazy, observable y delegados propios", "K2"),
         HitoAprendizaje("ka_inline", "inline / crossinline", "Por qué forEach no crea objetos", "K2"),
         HitoAprendizaje("ka_dsl", "DSLs y value class", "Lambdas con receptor, @JvmInline", "K2"),
+        HitoAprendizaje("ki_seq", "Sequences", "Evaluación perezosa: cuándo compensa y cuándo no", "K3"),
+        HitoAprendizaje("ki_chan", "Channels", "Cola caliente entre corrutinas · Flow frío vs Channel", "K3"),
+        HitoAprendizaje("ki_ops", "Colecciones avanzadas", "fold, zip, windowed, partition, groupingBy", "K3"),
+        HitoAprendizaje("ki_azucar", "Azúcar idiomático", "infix, destructuring, companion object, Result", "K3"),
     )),
     NivelAprendizaje("🟣 Kotlin · Concurrencia", "⚙️", listOf(
         HitoAprendizaje("co_suspend", "Corrutinas", "suspend, launch, async/await, Dispatchers", "K3"),
@@ -87,6 +91,17 @@ val rutaCompleta = listOf(
         HitoAprendizaje("g_adaptive", "Layouts adaptativos", "WindowSizeClass, list-detail, plegables", "C10"),
         HitoAprendizaje("g_interop", "Interop con Views", "AndroidView, ComposeView, migración legacy", "C11"),
         HitoAprendizaje("g_uitest", "Tests de UI", "composeTestRule, finders, acciones, aserciones", "BuscadorUiTest.kt"),
+    )),
+    NivelAprendizaje("🎨 Compose · Sistema de diseño", "🎭", listOf(
+        HitoAprendizaje("m3_color", "Roles de color M3", "primary/onPrimary, dynamic color, modo oscuro", "C12"),
+        HitoAprendizaje("m3_comp", "Componentes M3", "Diálogos, ModalBottomSheet, snackbars, chips, badges", "C12"),
+        HitoAprendizaje("m3_insets", "Insets y edge-to-edge", "WindowInsets, imePadding, safeDrawing", "C12"),
+        HitoAprendizaje("tx_annot", "AnnotatedString", "Estilos, colores y resaltado dentro de un Text", "C13"),
+        HitoAprendizaje("tx_mask", "Máscaras de entrada", "VisualTransformation + OffsetMapping", "C13"),
+        HitoAprendizaje("tx_foco", "Teclado y foco", "ImeAction, moveFocus, cerrar el teclado", "C13"),
+        HitoAprendizaje("li_lazy", "Listas Lazy a fondo", "key, contentType, stickyHeader, animateItem", "C14"),
+        HitoAprendizaje("li_pag", "Scroll infinito", "Paginación manual y qué automatiza Paging 3", "C14"),
+        HitoAprendizaje("li_saver", "Savers y process death", "rememberSaveable con Saver propio, produceState", "C14"),
     )),
     NivelAprendizaje("🎨 Compose · Interno", "🔬", listOf(
         HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "C12"),

@@ -62,6 +62,14 @@ val rutaCompleta = listOf(
         HitoAprendizaje("s_test", "Testing", "JUnit + patrón AAA sobre lógica pura", "LogicaKotlinTest.kt"),
         HitoAprendizaje("s_arch", "Reto final", "Crea TU app: API + caché Room + navegación, sin mirar", "Tu proyecto"),
     )),
+    NivelAprendizaje("Nivel 5: Experto", "🧠", listOf(
+        HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "Lección 14"),
+        HitoAprendizaje("x_layout", "Layouts custom y Canvas", "Layout(), Modifier.layout y dibujo directo", "Lección 15"),
+        HitoAprendizaje("x_cl", "CompositionLocal", "Design tokens y theming como MaterialTheme", "Lección 16"),
+        HitoAprendizaje("x_arch", "Clean + MVI + DI", "UseCases, reducer puro, estado único inmutable", "Lección 17"),
+        HitoAprendizaje("x_test2", "Testing del dominio", "Reducer y UseCase probados sin Android", "ArquitecturaSeniorTest.kt"),
+        HitoAprendizaje("x_kmp", "Kotlin Multiplatform", "expect/actual, commonMain, Compose Multiplatform", "Lección 18"),
+    )),
 )
 
 @Composable

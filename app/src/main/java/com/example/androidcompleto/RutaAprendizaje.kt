@@ -35,9 +35,9 @@ data class NivelAprendizaje(
 )
 
 /**
- * EL TEMARIO COMPLETO EN TRES PISTAS.
+ * EL TEMARIO COMPLETO EN CUATRO PISTAS.
  * Cada pista se puede recorrer por separado, pero el orden recomendado es
- * Kotlin → Compose → KMP: la última reutiliza todo lo anterior.
+ * Kotlin → Compose → KMP → Backend: cada una reutiliza lo anterior.
  */
 val rutaCompleta = listOf(
     // ══════════════ 🟣 PISTA KOTLIN ══════════════
@@ -104,9 +104,9 @@ val rutaCompleta = listOf(
         HitoAprendizaje("li_saver", "Savers y process death", "rememberSaveable con Saver propio, produceState", "C14"),
     )),
     NivelAprendizaje("🎨 Compose · Interno", "🔬", listOf(
-        HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "C12"),
-        HitoAprendizaje("x_layout", "Layouts custom y Canvas", "Layout(), Modifier.layout y dibujo directo", "C13"),
-        HitoAprendizaje("x_cl", "CompositionLocal", "Design tokens y theming como MaterialTheme", "C14"),
+        HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "C15"),
+        HitoAprendizaje("x_layout", "Layouts custom y Canvas", "Layout(), Modifier.layout y dibujo directo", "C16"),
+        HitoAprendizaje("x_cl", "CompositionLocal", "Design tokens y theming como MaterialTheme", "C17"),
     )),
 
     // ══════════════ 🌍 PISTA KMP Y DATOS ══════════════
@@ -123,7 +123,27 @@ val rutaCompleta = listOf(
         HitoAprendizaje("m_ktor", "Ktor Client", "HTTP multiplataforma con motores por plataforma", "M2"),
         HitoAprendizaje("m_serial", "kotlinx.serialization", "JSON sin reflexión, generado en compilación", "M2"),
         HitoAprendizaje("m_koin", "Koin (DI en KMP)", "single/factory, por qué Hilt no vale en iOS", "M3"),
-        HitoAprendizaje("m_reto", "Reto final", "Migra tu dominio a un proyecto KMP y compílalo para iOS", "Tu proyecto"),
+        HitoAprendizaje("m_reto", "Reto KMP", "Migra tu dominio a un proyecto KMP y compílalo para iOS", "Tu proyecto"),
+    )),
+
+    // ══════════════ 🖥️ PISTA BACKEND Y WEB ══════════════
+    NivelAprendizaje("🖥️ Backend · Ktor Server", "⚡", listOf(
+        HitoAprendizaje("s_routing", "Routing y plugins", "embeddedServer, install(), rutas anidadas", "S1"),
+        HitoAprendizaje("s_rest", "API REST completa", "GET/POST/PATCH/DELETE, códigos de estado, params", "S1"),
+        HitoAprendizaje("s_errores", "Errores centralizados", "StatusPages: 400, 404 y 500 en un solo sitio", "S1"),
+        HitoAprendizaje("s_shared", "Modelo compartido", "El mismo data class en servidor y cliente", "S1"),
+        HitoAprendizaje("s_valid", "Validación compartida", "Misma función en cliente (UX) y servidor (seguridad)", "S1"),
+    )),
+    NivelAprendizaje("🖥️ Backend · Producción", "🚢", listOf(
+        HitoAprendizaje("s_db", "Exposed y SQL", "Tablas type-safe, transacciones suspendidas", "S2"),
+        HitoAprendizaje("s_auth", "Autenticación JWT", "Authentication, authenticate {}, refresh de token", "S2"),
+        HitoAprendizaje("s_test", "Testear el servidor", "testApplication: rutas probadas sin abrir puertos", "S2"),
+        HitoAprendizaje("s_deploy", "Despliegue", "Fat-jar, Docker, config por variables de entorno", "S2"),
+    )),
+    NivelAprendizaje("🖥️ Frontend web con Kotlin", "🌐", listOf(
+        HitoAprendizaje("w_wasm", "Compose para Web", "La misma UI Compose compilada a WebAssembly", "S2"),
+        HitoAprendizaje("w_js", "Kotlin/JS y HTML", "DOM real para SEO; cuándo elegir cada camino", "S2"),
+        HitoAprendizaje("w_reto", "Reto final", "Un proyecto: shared + server + app + web, todo Kotlin", "Tu proyecto"),
     )),
 )
 

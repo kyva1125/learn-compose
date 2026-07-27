@@ -90,6 +90,12 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
+    //Backend: servidor Ktor embebido, para que la lección corra de verdad
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.cio)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.status.pages)
+
     testImplementation(libs.junit)
     //Testing de corrutinas y Flows (runTest, TestDispatcher, Turbine)
     testImplementation(libs.kotlinx.coroutines.test)

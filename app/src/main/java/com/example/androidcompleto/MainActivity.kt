@@ -1,9 +1,6 @@
 package com.example.androidcompleto
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Space
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -14,22 +11,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.androidcompleto.ui.theme.AndroidCompletoTheme
-import androidx.compose.ui.res.colorResource
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,34 +44,23 @@ enum class Pantalla {
     RENDIMIENTO, LAYOUTS_CUSTOM, COMPOSITION_LOCAL,
 
     // ---- PISTA KMP Y DATOS (la capa que se comparte entre plataformas) ----
-    KMP, KTOR_KMP, INYECCION, RED, PERSISTENCIA, ROOM, RED_AVANZADA, OFFLINE
+    KMP, KTOR_KMP, INYECCION, RED, PERSISTENCIA, ROOM, RED_AVANZADA, OFFLINE,
+
+    // ---- PISTA BACKEND Y FULL-STACK (Kotlin del lado servidor y web) ----
+    BACKEND, FULLSTACK
 }
 
-/** Las tres pistas de aprendizaje en las que se agrupan las lecciones. */
+/** Las cuatro pistas de aprendizaje en las que se agrupan las lecciones. */
 enum class Pista(val titulo: String, val emoji: String, val descripcion: String) {
     KOTLIN_P("Kotlin", "🟣", "El lenguaje. Todo esto corre igual en Android, iOS y servidor."),
     COMPOSE_P("Compose", "🎨", "La interfaz declarativa: de layouts a gestos y accesibilidad."),
-    KMP_P("KMP y datos", "🌍", "La capa que se comparte: red, persistencia e inyección.")
+    KMP_P("KMP y datos", "🌍", "La capa que se comparte: red, persistencia e inyección."),
+    BACKEND_P("Backend y web", "🖥️", "Kotlin del lado servidor y frontend web: full-stack completo.")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppPrincipal() {
-
-    val context = LocalContext.current;
-
-    // Color del recurso
-    val colorBar = colorResource(R.color.purple_500);
-
-    // Snackbar
-    val scope = rememberCoroutineScope();
-    val snackbarHostState = remember { SnackbarHostState() }
-
-    // Menu
-    var expandedMenu by remember { mutableStateOf(false) }
-
-    // FabPosition
-    var fabPosition by remember { mutableStateOf(FabPosition.End) }
 
     var pantallaActual by remember { mutableStateOf(Pantalla.MENU) }
 
@@ -94,70 +70,6 @@ fun AppPrincipal() {
     }
 
     Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = colorBar
-            ) {
-                CompositionLocalProvider(
-                    LocalContentColor provides MaterialTheme.colorScheme.onSurface
-                ) {
-                    IconButton(onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar("Horas locas");
-                        }
-                    }) {
-                        Icon(Icons.Filled.Menu, contentDescription = "Menu")
-
-                    }
-                }
-                Spacer(Modifier.weight(1f, true))
-                Box{
-                    IconButton(
-                        onClick = {
-                            expandedMenu = true;
-                        }
-                    ) {
-                        Icon(Icons.Filled.MoreVert,
-                            contentDescription = "Options")
-
-                    }
-                    DropdownMenu(expanded = expandedMenu, onDismissRequest = {
-                        expandedMenu = false;
-                    }) {
-                        DropdownMenuItem(
-                            text = {
-                                Text("Salir")
-                            },
-                            onClick = {
-                                expandedMenu = false;
-                                Toast.makeText(context, "Saliendo", Toast.LENGTH_SHORT).show();
-
-                            }
-                        )
-                    }
-                }
-
-
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-
-                onClick = {
-                    fabPosition = if(fabPosition == FabPosition.End){
-                        FabPosition.Center;
-                    }else{
-                        FabPosition.End;
-                    }
-                }
-            ) {
-                Icon(Icons.Default.SwapHoriz, contentDescription = null)
-            }
-        },
-        floatingActionButtonPosition = fabPosition,
         topBar = {
             TopAppBar(
                 title = {
@@ -200,6 +112,9 @@ fun AppPrincipal() {
                         Pantalla.ROOM -> "Room: BD Offline"
                         Pantalla.RED_AVANZADA -> "Retrofit Avanzado"
                         Pantalla.OFFLINE -> "Offline-First"
+                        // Pista Backend
+                        Pantalla.BACKEND -> "Backend con Ktor Server"
+                        Pantalla.FULLSTACK -> "Full-Stack Kotlin"
                     })
                 },
                 navigationIcon = {
@@ -252,18 +167,12 @@ fun AppPrincipal() {
                 Pantalla.ROOM -> PantallaRoom()
                 Pantalla.RED_AVANZADA -> PantallaRedAvanzada()
                 Pantalla.OFFLINE -> PantallaOfflineFirst()
+                // Pista Backend
+                Pantalla.BACKEND -> PantallaBackendKtor()
+                Pantalla.FULLSTACK -> PantallaFullStack()
             }
         }
     }
-
-    LaunchedEffect(Unit) {
-        Log.i("Message", "LaunchedEffect");
-    }
-
-//    DisposableEffect(LocalLifecycleOwner.current) {
-//        Log.i("Message", "LaunchedEffect");
-//
-//    }
 }
 
 /**
@@ -313,6 +222,10 @@ val temario: Map<Pista, List<OpcionMenu>> = mapOf(
         OpcionMenu("M6. Room 💾", "Base de datos SQLite offline: Entity, DAO, CRUD", Pantalla.ROOM),
         OpcionMenu("M7. Retrofit Avanzado 🌐", "Interceptores, POST, headers y errores HTTP", Pantalla.RED_AVANZADA),
         OpcionMenu("M8. Offline-First 🏆", "Room + Retrofit: la app que funciona sin internet", Pantalla.OFFLINE),
+    ),
+    Pista.BACKEND_P to listOf(
+        OpcionMenu("S1. Backend con Ktor ⚡", "Un servidor HTTP REAL corriendo dentro de la app", Pantalla.BACKEND),
+        OpcionMenu("S2. Full-Stack Kotlin 🔗", "Exposed, JWT, Compose Web/Wasm y despliegue", Pantalla.FULLSTACK),
     )
 )
 

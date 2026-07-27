@@ -47,7 +47,9 @@ class MainActivity : ComponentActivity() {
 enum class Pantalla {
     MENU, FLUTTER, KOTLIN, COMPOSE, ESTADO, CORRUTINAS, EFECTOS,
     NAVEGACION, ANIMACIONES, FORMULARIOS, RED, PERSISTENCIA,
-    ROOM, RED_AVANZADA, OFFLINE, RUTA
+    ROOM, RED_AVANZADA, OFFLINE,
+    RENDIMIENTO, LAYOUTS_CUSTOM, COMPOSITION_LOCAL, ARQUITECTURA, KMP,
+    RUTA
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -160,6 +162,11 @@ fun AppPrincipal() {
                         Pantalla.ROOM -> "Room: BD Offline"
                         Pantalla.RED_AVANZADA -> "Retrofit Avanzado"
                         Pantalla.OFFLINE -> "Offline-First"
+                        Pantalla.RENDIMIENTO -> "Rendimiento en Compose"
+                        Pantalla.LAYOUTS_CUSTOM -> "Layouts Custom y Canvas"
+                        Pantalla.COMPOSITION_LOCAL -> "CompositionLocal"
+                        Pantalla.ARQUITECTURA -> "Arquitectura Senior"
+                        Pantalla.KMP -> "Kotlin Multiplatform"
                         Pantalla.RUTA -> "Ruta de Aprendizaje"
                     })
                 },
@@ -190,6 +197,11 @@ fun AppPrincipal() {
                 Pantalla.ROOM -> PantallaRoom()
                 Pantalla.RED_AVANZADA -> PantallaRedAvanzada()
                 Pantalla.OFFLINE -> PantallaOfflineFirst()
+                Pantalla.RENDIMIENTO -> PantallaRendimiento()
+                Pantalla.LAYOUTS_CUSTOM -> PantallaLayoutsCustom()
+                Pantalla.COMPOSITION_LOCAL -> PantallaCompositionLocal()
+                Pantalla.ARQUITECTURA -> PantallaArquitectura()
+                Pantalla.KMP -> PantallaKmp()
                 Pantalla.RUTA -> PantallaRuta()
             }
         }
@@ -222,6 +234,11 @@ fun MenuPrincipal(onNavigate: (Pantalla) -> Unit) {
         OpcionMenu("11. Room 💾", "Base de datos SQLite offline: Entity, DAO, CRUD", Pantalla.ROOM),
         OpcionMenu("12. Retrofit Avanzado 🌐", "Interceptores, POST, headers y errores HTTP", Pantalla.RED_AVANZADA),
         OpcionMenu("13. Offline-First 🏆", "Room + Retrofit: la app que funciona sin internet", Pantalla.OFFLINE),
+        OpcionMenu("14. Rendimiento ⚡", "Recomposición, estabilidad y lecturas diferidas EN VIVO", Pantalla.RENDIMIENTO),
+        OpcionMenu("15. Layouts Custom 📐", "Layout(), Modifier.layout y gráficas con Canvas", Pantalla.LAYOUTS_CUSTOM),
+        OpcionMenu("16. CompositionLocal 🎨", "Design tokens y el secreto de MaterialTheme", Pantalla.COMPOSITION_LOCAL),
+        OpcionMenu("17. Arquitectura Senior 🏛️", "Clean Architecture + MVI + DI con tests puros", Pantalla.ARQUITECTURA),
+        OpcionMenu("18. Kotlin Multiplatform 🌍", "KMP y Compose Multiplatform: tu código en iOS", Pantalla.KMP),
         OpcionMenu("🎯 Tu Ruta a Senior", "Checklist con progreso guardado en DataStore", Pantalla.RUTA)
     )
 

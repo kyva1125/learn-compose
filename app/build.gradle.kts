@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp) // procesador de anotaciones: genera el código de Room
+    alias(libs.plugins.kotlin.serialization) // kotlinx.serialization: JSON y rutas type-safe
 }
 
 android {
@@ -77,12 +78,28 @@ dependencies {
     //Logging de red (ver las peticiones HTTP en Logcat)
     implementation(libs.okhttp.logging.interceptor)
 
+    //Adaptive: tablets y plegables (WindowSizeClass)
+    implementation(libs.androidx.compose.material3.window.size)
+
+    //Stack KMP: este mismo código vive en commonMain de un proyecto multiplataforma
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     testImplementation(libs.junit)
+    //Testing de corrutinas y Flows (runTest, TestDispatcher, Turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

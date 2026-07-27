@@ -34,41 +34,81 @@ data class NivelAprendizaje(
     val hitos: List<HitoAprendizaje>
 )
 
+/**
+ * EL TEMARIO COMPLETO EN TRES PISTAS.
+ * Cada pista se puede recorrer por separado, pero el orden recomendado es
+ * Kotlin → Compose → KMP: la última reutiliza todo lo anterior.
+ */
 val rutaCompleta = listOf(
-    NivelAprendizaje("Nivel 1: Fundamentos", "🌱", listOf(
-        HitoAprendizaje("k_sintaxis", "Sintaxis Kotlin", "val/var, null safety, when, data classes", "Lección 1"),
-        HitoAprendizaje("k_lambdas", "Colecciones y lambdas", "filter, map, groupBy — úsalos sin pensar", "Lección 1"),
-        HitoAprendizaje("c_layouts", "Layouts básicos", "Column, Row, Box, Modifier y su ORDEN", "Lección 2"),
-        HitoAprendizaje("c_listas", "Listas Lazy", "LazyColumn/Row/Grid con keys", "Lección 2"),
+    // ══════════════ 🟣 PISTA KOTLIN ══════════════
+    NivelAprendizaje("🟣 Kotlin · Fundamentos", "🌱", listOf(
+        HitoAprendizaje("k_sintaxis", "Sintaxis Kotlin", "val/var, null safety, when, data classes", "K1"),
+        HitoAprendizaje("k_lambdas", "Colecciones y lambdas", "filter, map, groupBy — úsalos sin pensar", "K1"),
+        HitoAprendizaje("k_clases", "Clases y sealed", "Herencia, interfaces, sealed para estados", "K1"),
     )),
-    NivelAprendizaje("Nivel 2: Reactividad", "⚡", listOf(
-        HitoAprendizaje("e_remember", "Estado local", "remember, mutableStateOf, rememberSaveable", "Lección 3"),
-        HitoAprendizaje("e_vm", "ViewModel + StateFlow", "Estado que sobrevive rotaciones", "Lección 3"),
-        HitoAprendizaje("co_suspend", "Corrutinas", "suspend, launch, async/await, Dispatchers", "Lección 4"),
-        HitoAprendizaje("co_flow", "Flows", "flow, operadores, collect, StateFlow vs SharedFlow", "Lección 4"),
-        HitoAprendizaje("ef_efectos", "Efectos secundarios", "LaunchedEffect, DisposableEffect, derivedStateOf", "Lección 5"),
+    NivelAprendizaje("🟣 Kotlin · Avanzado", "🧬", listOf(
+        HitoAprendizaje("ka_varianza", "Genéricos y varianza", "in / out, reified, type erasure", "K2"),
+        HitoAprendizaje("ka_delegados", "Delegados", "by lazy, observable y delegados propios", "K2"),
+        HitoAprendizaje("ka_inline", "inline / crossinline", "Por qué forEach no crea objetos", "K2"),
+        HitoAprendizaje("ka_dsl", "DSLs y value class", "Lambdas con receptor, @JvmInline", "K2"),
     )),
-    NivelAprendizaje("Nivel 3: App real", "🏗", listOf(
-        HitoAprendizaje("n_nav", "Navegación", "NavHost, rutas con argumentos, back stack", "Lección 6"),
-        HitoAprendizaje("a_anim", "Animaciones", "animateAsState, AnimatedVisibility, transiciones", "Lección 7"),
-        HitoAprendizaje("f_forms", "Formularios", "State hoisting + validación derivada", "Lección 8"),
-        HitoAprendizaje("r_retrofit", "Retrofit + MVVM", "API → Repository → ViewModel → sealed UiState", "Lección 9"),
-        HitoAprendizaje("p_datastore", "DataStore", "Preferencias persistentes como Flow", "Lección 10"),
+    NivelAprendizaje("🟣 Kotlin · Concurrencia", "⚙️", listOf(
+        HitoAprendizaje("co_suspend", "Corrutinas", "suspend, launch, async/await, Dispatchers", "K3"),
+        HitoAprendizaje("co_flow", "Flows", "flow, operadores, collect, StateFlow vs SharedFlow", "K3"),
+        HitoAprendizaje("co_estructurada", "Concurrencia estructurada", "Padres e hijos, cancelación cooperativa", "K4"),
+        HitoAprendizaje("co_errores", "Errores en corrutinas", "coroutineScope vs supervisorScope, handlers", "K4"),
+        HitoAprendizaje("co_operadores", "Operadores de Flow", "flatMapLatest, debounce, combine, retry, buffer", "K4"),
     )),
-    NivelAprendizaje("Nivel 4: Senior", "🚀", listOf(
-        HitoAprendizaje("s_room", "Room", "Entity, DAO con Flow, CRUD offline", "Lección 11"),
-        HitoAprendizaje("s_red2", "Retrofit avanzado", "Interceptores, POST, Response<T>, errores HTTP", "Lección 12"),
-        HitoAprendizaje("s_offline", "Offline-First", "Single Source of Truth: Room + Retrofit", "Lección 13"),
-        HitoAprendizaje("s_test", "Testing", "JUnit + patrón AAA sobre lógica pura", "LogicaKotlinTest.kt"),
-        HitoAprendizaje("s_arch", "Reto final", "Crea TU app: API + caché Room + navegación, sin mirar", "Tu proyecto"),
+    NivelAprendizaje("🟣 Kotlin · Calidad", "🧪", listOf(
+        HitoAprendizaje("t_runtest", "runTest y tiempo virtual", "advanceTimeBy, advanceUntilIdle, TestDispatcher", "K5"),
+        HitoAprendizaje("t_turbine", "Turbine", "awaitItem() sobre Flows, sin tests inestables", "K5"),
+        HitoAprendizaje("t_fakes", "Fakes sobre mocks", "Dobles de prueba escritos a mano", "K5"),
+        HitoAprendizaje("t_arch", "Clean + MVI", "UseCases, reducer puro, estado único inmutable", "K6"),
+        HitoAprendizaje("t_dominio", "Dominio testeado", "Reducer y UseCase probados sin Android", "ArquitecturaSeniorTest.kt"),
     )),
-    NivelAprendizaje("Nivel 5: Experto", "🧠", listOf(
-        HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "Lección 14"),
-        HitoAprendizaje("x_layout", "Layouts custom y Canvas", "Layout(), Modifier.layout y dibujo directo", "Lección 15"),
-        HitoAprendizaje("x_cl", "CompositionLocal", "Design tokens y theming como MaterialTheme", "Lección 16"),
-        HitoAprendizaje("x_arch", "Clean + MVI + DI", "UseCases, reducer puro, estado único inmutable", "Lección 17"),
-        HitoAprendizaje("x_test2", "Testing del dominio", "Reducer y UseCase probados sin Android", "ArquitecturaSeniorTest.kt"),
-        HitoAprendizaje("x_kmp", "Kotlin Multiplatform", "expect/actual, commonMain, Compose Multiplatform", "Lección 18"),
+
+    // ══════════════ 🎨 PISTA COMPOSE ══════════════
+    NivelAprendizaje("🎨 Compose · Base", "🧱", listOf(
+        HitoAprendizaje("c_layouts", "Layouts básicos", "Column, Row, Box, Modifier y su ORDEN", "C1"),
+        HitoAprendizaje("c_listas", "Listas Lazy", "LazyColumn/Row/Grid con keys", "C1"),
+        HitoAprendizaje("e_remember", "Estado local", "remember, mutableStateOf, rememberSaveable", "C2"),
+        HitoAprendizaje("e_vm", "ViewModel + StateFlow", "Estado que sobrevive rotaciones", "C2"),
+        HitoAprendizaje("ef_efectos", "Efectos secundarios", "LaunchedEffect, DisposableEffect, derivedStateOf", "C3"),
+    )),
+    NivelAprendizaje("🎨 Compose · App real", "🏗", listOf(
+        HitoAprendizaje("n_nav", "Navegación", "NavHost, rutas con argumentos, back stack", "C4"),
+        HitoAprendizaje("n_navts", "Navegación type-safe", "Rutas @Serializable, toRoute(), deep links", "C5"),
+        HitoAprendizaje("a_anim", "Animaciones", "animateAsState, AnimatedVisibility, transiciones", "C6"),
+        HitoAprendizaje("f_forms", "Formularios", "State hoisting + validación derivada", "C7"),
+    )),
+    NivelAprendizaje("🎨 Compose · Profesional", "💎", listOf(
+        HitoAprendizaje("g_gestos", "Gestos táctiles", "pointerInput, draggable, swipe-to-dismiss, zoom", "C8"),
+        HitoAprendizaje("g_a11y", "Accesibilidad", "Semantics, TalkBack, mergeDescendants, 48dp", "C9"),
+        HitoAprendizaje("g_adaptive", "Layouts adaptativos", "WindowSizeClass, list-detail, plegables", "C10"),
+        HitoAprendizaje("g_interop", "Interop con Views", "AndroidView, ComposeView, migración legacy", "C11"),
+        HitoAprendizaje("g_uitest", "Tests de UI", "composeTestRule, finders, acciones, aserciones", "BuscadorUiTest.kt"),
+    )),
+    NivelAprendizaje("🎨 Compose · Interno", "🔬", listOf(
+        HitoAprendizaje("x_perf", "Rendimiento", "Skipping, estabilidad, derivedStateOf, lecturas diferidas", "C12"),
+        HitoAprendizaje("x_layout", "Layouts custom y Canvas", "Layout(), Modifier.layout y dibujo directo", "C13"),
+        HitoAprendizaje("x_cl", "CompositionLocal", "Design tokens y theming como MaterialTheme", "C14"),
+    )),
+
+    // ══════════════ 🌍 PISTA KMP Y DATOS ══════════════
+    NivelAprendizaje("🌍 Datos · Android", "💾", listOf(
+        HitoAprendizaje("r_retrofit", "Retrofit + MVVM", "API → Repository → ViewModel → sealed UiState", "M4"),
+        HitoAprendizaje("p_datastore", "DataStore", "Preferencias persistentes como Flow", "M5"),
+        HitoAprendizaje("s_room", "Room", "Entity, DAO con Flow, CRUD offline", "M6"),
+        HitoAprendizaje("s_red2", "Retrofit avanzado", "Interceptores, POST, Response<T>, errores HTTP", "M7"),
+        HitoAprendizaje("s_offline", "Offline-First", "Single Source of Truth: Room + Retrofit", "M8"),
+    )),
+    NivelAprendizaje("🌍 KMP · Multiplataforma", "🚀", listOf(
+        HitoAprendizaje("m_expect", "expect / actual", "commonMain, androidMain, iosMain", "M1"),
+        HitoAprendizaje("m_cmp", "Compose Multiplatform", "Una UI para Android, iOS, Desktop y Web", "M1"),
+        HitoAprendizaje("m_ktor", "Ktor Client", "HTTP multiplataforma con motores por plataforma", "M2"),
+        HitoAprendizaje("m_serial", "kotlinx.serialization", "JSON sin reflexión, generado en compilación", "M2"),
+        HitoAprendizaje("m_koin", "Koin (DI en KMP)", "single/factory, por qué Hilt no vale en iOS", "M3"),
+        HitoAprendizaje("m_reto", "Reto final", "Migra tu dominio a un proyecto KMP y compílalo para iOS", "Tu proyecto"),
     )),
 )
 
